@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Videos
+{% endblock %}
+
+{% block body %}
+	<h1>Videos</h1>
+
+	<table class="table">
+		<tbody>
+			{% for comment in video.comments %}
+
+				<tr>
+					<th>Title</th>
+					<td>{{ video.title }}</td>
+				</tr>
+				<tr>
+					<th>Description</th>
+					<td>{{ video.description }}</td>
+				</tr>
+				<tr>
+					<th>PublicDate</th>
+					<td>{{ video.publicDate ? video.publicDate|date('Y-m-d H:i:s') : '' }}</td>
+				</tr>
+				<tr>
+
+					<h5>Commentaire:</h5>
+					a écrit le
+					{{ comment.date|date('d/m/Y') }}
+					:<br/>
+					{{ comment.content }}
+					<h5>user:</h5>
+					{{video.author.firstname}}
+					<h5>nombre de vue :</h5>
+					{{ video.views }}
+				</tr>
+			</br>
+		{% else %}
+			<tr>
+				<td colspan="6">no records found</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</tr></tbody></table><iframe width="560" height="315" src="https://www.youtube.com/embed/{{recup}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></br><a href="{{ path('videos_index') }}">back to list</a></br><a href="{{ path('videos_edit', {'id': video.id}) }}">edit</a></br><a href="{{ path('videos_views', {'id': video.id}) }}">j'ai vu la video</a>{{ include('videos/_delete_form.html.twig') }}{% endblock %}

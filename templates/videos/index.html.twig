@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Videos index
+{% endblock %}
+
+{% block body %}
+	<h1>Page d'accueil</h1>
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Title</th>
+				<th>Description</th>
+				<th>PublicDate</th>
+				<th>Link</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for video in videos %}
+
+
+				<tr>
+					<td>{{ video.id }}</td>
+					<td>{{ video.title }}</td>
+					<td>{{ video.description }}</td>
+					<td>{{ video.publicDate ? video.publicDate|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ video.link }}</td>
+
+					<td>
+						<a href="{{ path('videos_show', {'id': video.id}) }}">show</a>
+						<a href="{{ path('videos_edit', {'id': video.id}) }}">edit</a>
+					</td>
+				</tr>
+
+
+			{% else %}
+				<tr>
+					<td colspan="6">no records found</td>
+				</tr>
+
+
+			{% endfor %}
+			{# {{ render(controller(
+						        'App\\Controller\\SearchController::searchBar'
+						 )) }} #}
+		</tbody>
+	</table>
+
+	<a href="{{ path('videos_new') }}">Create new</a>
+{% endblock %}

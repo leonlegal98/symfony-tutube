@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TutubeurController!
+{% endblock %}
+
+{% block body %}
+	<h1>Page tutubeur</h1>
+
+	{% for video in videos %}
+
+
+		{% if video.id < 2 %}
+			<h5>user:</h5>
+			{{video.author.firstname}}
+
+		{% endif %}
+
+
+		<h5>nombre de vue :</h5>
+		{{ video.views }}
+
+		<a href="{{ path('videos_show_tu', {'id': video.id}) }}">show</a>
+
+
+	</br>
+{% else %}
+	<tr>
+		<td colspan="6">no records found</td>
+	</tr>
+{% endfor %}
+
+<a href="{{ path('home') }}">page d'accueil</a>{% endblock %}
